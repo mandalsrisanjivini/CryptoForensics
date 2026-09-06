@@ -1,0 +1,14 @@
+backend
+backend/**
+dataset
+dataset/**
+models
+models/**
+scratch
+scratch/**
+archive*.zip
+*.bat
+Dockerfile
+render.yaml
+.pytest_cache
+.pytest_cache/**
