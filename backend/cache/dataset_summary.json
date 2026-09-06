@@ -1,0 +1,11 @@
+{
+  "total_transactions": 203769,
+  "illicit_transactions": 4545,
+  "licit_transactions": 42019,
+  "unknown_transactions": 157205,
+  "total_edges": 234355,
+  "total_timesteps": 49,
+  "illicit_percentage": 2.23,
+  "licit_percentage": 20.62,
+  "unknown_percentage": 77.15
+}

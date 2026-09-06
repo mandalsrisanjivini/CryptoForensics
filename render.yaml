@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: cryptoforensics-backend
+    runtime: docker
+    dockerfilePath: Dockerfile
+    plan: starter
+    region: oregon
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: ALLOWED_ORIGINS
+        value: "https://*.vercel.app"
+    healthCheckPath: /api/metrics/summary

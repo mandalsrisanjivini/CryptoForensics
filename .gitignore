@@ -1,0 +1,13 @@
+﻿dataset/
+models/
+node_modules/
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
+dist/
+frontend/node_modules/
+frontend/dist/
+
+archive*.zip

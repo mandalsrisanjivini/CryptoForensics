@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CryptoForensics — Transaction Intelligence &amp; AML Investigation Platform</title>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body class="platform-app">
+
+  <!-- 1. PRIMARY COMMERCIAL PRODUCT HEADER -->
+  <header class="app-header">
+    <div class="header-brand" id="btn-brand-home" role="button" title="CryptoForensics Platform">
+      <div class="brand-logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <polygon points="12 2 21 7 21 17 12 22 3 17 3 7" stroke="#38bdf8" stroke-width="2" fill="rgba(56, 189, 248, 0.12)"/>
+          <circle cx="12" cy="12" r="3" fill="#38bdf8"/>
+          <line x1="12" y1="2" x2="12" y2="9" stroke="#38bdf8" stroke-width="1.5"/>
+          <line x1="21" y1="17" x2="15" y2="13.5" stroke="#38bdf8" stroke-width="1.5"/>
+          <line x1="3" y1="17" x2="9" y2="13.5" stroke="#38bdf8" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="brand-text-block">
+        <span class="app-name">CryptoForensics</span>
+        <span class="app-tagline">AI Transaction Intelligence &amp; AML Workstation</span>
+      </div>
+    </div>
+
+    <!-- Center Primary Product Navigation Tabs -->
+    <nav class="header-nav-menu" id="primary-product-nav">
+      <button class="nav-item-btn active" id="nav-btn-home" data-view="home" title="Home">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Home</span>
+      </button>
+      <button class="nav-item-btn" id="nav-btn-investigate" data-view="investigate" title="Investigate a Transaction">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <span>Investigate</span>
+      </button>
+      <button class="nav-item-btn" id="nav-btn-radar" data-view="radar" title="Automated Threat Discovery Radar (No TXID needed)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/></svg>
+        <span>Threat Radar</span>
+      </button>
+      <button class="nav-item-btn" id="nav-btn-timeline" data-view="timeline" title="49-Period Threat Timeline &amp; Activity Matrix">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>Timeline (49)</span>
+      </button>
+      <button class="nav-item-btn" id="nav-btn-network" data-view="network" title="3D Transaction Network">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        <span>Network</span>
+      </button>
+      <button class="nav-item-btn" id="nav-btn-cases" data-view="cases" title="Case Files">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <span>Cases (<span id="hdr-case-count" class="mono">0</span>)</span>
+      </button>
+      <button class="nav-item-btn" id="nav-btn-reports" data-view="reports" title="Reports">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <span>Reports (<span id="hdr-report-count" class="mono">0</span>)</span>
+      </button>
+      <button class="nav-item-btn" id="nav-btn-data" data-view="data" title="Dataset Information">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <span>Data</span>
+      </button>
+      <button class="nav-item-btn" id="nav-btn-architecture" data-view="architecture" title="System Architecture &amp; ML Pipeline">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+        <span>Architecture</span>
+      </button>
+    </nav>
+
+    <!-- Right Header Quick Action -->
+    <div class="header-actions">
+      <div class="header-quick-search-box">
+        <svg class="search-mini-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" id="header-search-input" placeholder="Search Tx ID..." autocomplete="off" spellcheck="false">
+      </div>
+      <button class="header-btn-action" id="btn-header-explore-network" title="Switch to Full 3D Network Workstation">
+        <span>Explore Network</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- 2. MAIN 3D APPLICATION STAGE -->
+  <main class="viewport-wrapper" id="viewport-stage">
+
+    <!-- A. Persistent 3D WebGL Canvas Layer (Runs continuously in background for profound spatial depth) -->
+    <div id="hero-graph-canvas" class="graph-canvas-layer"></div>
+
+    <!-- Global Notification Toast -->
+    <div id="app-toast" class="app-toast-clean hidden"></div>
+
+    <!-- =================================================================== -->
+    <!-- VIEW 1: NETWORK OVERVIEW (OPENING EXPERIENCE & MACRO INTELLIGENCE) -->
+    <!-- =================================================================== -->
+    <!-- =================================================================== -->
+    <!-- VIEW 0: THREAT RADAR (ZERO-TXID DISCOVERY & AUTOMATED TRIAGE)       -->
+    <!-- =================================================================== -->
+    <section class="spatial-view-container view-radar hidden" id="view-radar">
+      <div id="threat-radar-container" style="width: 100%;"></div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- VIEW: 49-PERIOD THREAT TIMELINE & ACTIVITY MATRIX                   -->
+    <!-- =================================================================== -->
+    <section class="spatial-view-container view-timeline hidden" id="view-timeline">
+      <div class="timeline-workstation-layout">
+        <!-- Top Header & Metrics Banner -->
+        <header class="timeline-header-bar">
+          <div class="timeline-header-title-block">
+            <div class="timeline-tag-pill">Temporal Forensic Intelligence</div>
+            <h2 class="timeline-main-title">49-Period Bitcoin Threat Timeline</h2>
+            <p class="timeline-desc">
+              Comprehensive temporal activity across all 49 authentic Elliptic dataset snapshots (~2 weeks per period, 203,769 total transactions).
+            </p>
+          </div>
+          <div class="timeline-header-actions">
+            <button class="btn-find-high-risk" id="btn-timeline-find-high-risk">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <span>Find High-Risk Periods</span>
+            </button>
+            <button class="btn-open-3d-period" id="btn-timeline-open-3d">
+              <span>Open in 3D Network</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Horizontal 49-Period Activity Grid Strip -->
+        <div class="timeline-strip-container">
+          <div class="timeline-strip-header">
+            <span class="strip-header-lbl">49-Period Threat Activity & Density</span>
+            <div class="strip-legend">
+              <span class="legend-item"><span class="legend-chip red"></span>Critical/Illicit Threat</span>
+              <span class="legend-item"><span class="legend-chip amber"></span>Elevated Threat</span>
+              <span class="legend-item"><span class="legend-chip green"></span>Licit Baseline</span>
+              <span class="legend-item"><span class="legend-chip gray"></span>Unlabeled Flow</span>
+            </div>
+          </div>
+          <div class="timeline-matrix-49-strip" id="timeline-matrix-49-strip">
+            <!-- 49 interactive column bars rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Selected Period Detailed Intelligence & Comparison Panel -->
+        <div class="timeline-selected-panel" id="timeline-selected-panel">
+          <!-- Left: Current Period Detail -->
+          <div class="timeline-detail-col">
+            <div class="timeline-detail-card">
+              <div class="detail-card-hdr">
+                <span class="hdr-tag">Period Intelligence</span>
+                <span class="period-badge-large mono" id="tp-selected-period-num">Period 1 of 49</span>
+              </div>
+              <div class="period-metrics-grid">
+                <div class="pm-metric-box">
+                  <span class="pm-lbl">Transactions</span>
+                  <strong class="pm-val mono" id="tp-total-txs">7,880</strong>
+                </div>
+                <div class="pm-metric-box threat">
+                  <span class="pm-lbl">Illicit Txs</span>
+                  <strong class="pm-val mono text-threat" id="tp-illicit-txs">17</strong>
+                </div>
+                <div class="pm-metric-box licit">
+                  <span class="pm-lbl">Licit Txs</span>
+                  <strong class="pm-val mono text-emerald" id="tp-licit-txs">2,130</strong>
+                </div>
+                <div class="pm-metric-box">
+                  <span class="pm-lbl">Unknown Txs</span>
+                  <strong class="pm-val mono text-dim" id="tp-unknown-txs">5,733</strong>
+                </div>
+                <div class="pm-metric-box">
+                  <span class="pm-lbl">Avg Risk Score</span>
+                  <strong class="pm-val mono" id="tp-avg-risk">26 / 100</strong>
+                </div>
+                <div class="pm-metric-box">
+                  <span class="pm-lbl">Activity Level</span>
+                  <strong class="pm-val" id="tp-activity-level">Critical</strong>
+                </div>
+              </div>
+              <div class="period-narrative-box" id="tp-narrative-box">
+                <strong class="narrative-tag" id="tp-narrative-tag">Genesis Temporal Strata</strong>
+                <p class="narrative-text" id="tp-narrative-text">Initial dataset snapshot containing early Bitcoin laundering syndicates.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Period Comparison (Previous vs Current vs Next) -->
+          <div class="timeline-comparison-col">
+            <div class="timeline-comparison-card">
+              <div class="comparison-card-hdr">
+                <span class="hdr-tag">Period Comparison</span>
+                <span class="mono text-dim" id="tp-comparison-tag">Period 1 (Genesis Snapshot)</span>
+              </div>
+              <div class="comparison-triplet-grid">
+                <div class="comp-col prev" id="comp-col-prev">
+                  <span class="comp-col-title">Previous Period</span>
+                  <strong class="comp-period-id mono" id="comp-prev-id">None</strong>
+                  <div class="comp-metric-line">
+                    <span class="comp-k">Txs:</span>
+                    <span class="comp-v mono" id="comp-prev-txs">—</span>
+                  </div>
+                  <div class="comp-metric-line">
+                    <span class="comp-k">Illicit:</span>
+                    <span class="comp-v mono text-threat" id="comp-prev-illicit">—</span>
+                  </div>
+                  <div class="comp-metric-line">
+                    <span class="comp-k">Risk:</span>
+                    <span class="comp-v mono" id="comp-prev-risk">—</span>
+                  </div>
+                </div>
+
+                <div class="comp-col current active" id="comp-col-curr">
+                  <span class="comp-col-title">Current Period</span>
+                  <strong class="comp-period-id mono text-cyan" id="comp-curr-id">Period 1</strong>
+                  <div class="comp-metric-line">
+                    <span class="comp-k">Txs:</span>
+                    <span class="comp-v mono" id="comp-curr-txs">7,880</span>
+                  </div>
+                  <div class="comp-metric-line">
+                    <span class="comp-k">Illicit:</span>
+                    <span class="comp-v mono text-threat" id="comp-curr-illicit">17</span>
+                  </div>
+                  <div class="comp-metric-line">
+                    <span class="comp-k">Risk:</span>
+                    <span class="comp-v mono" id="comp-curr-risk">26/100</span>
+                  </div>
+                </div>
+
+                <div class="comp-col next" id="comp-col-next">
+                  <span class="comp-col-title">Next Period</span>
+                  <strong class="comp-period-id mono" id="comp-next-id">Period 2</strong>
+                  <div class="comp-metric-line">
+                    <span class="comp-k">Txs:</span>
+                    <span class="comp-v mono" id="comp-next-txs">4,544</span>
+                  </div>
+                  <div class="comp-metric-line">
+                    <span class="comp-k">Illicit:</span>
+                    <span class="comp-v mono text-threat" id="comp-next-illicit">18</span>
+                  </div>
+                  <div class="comp-metric-line">
+                    <span class="comp-k">Risk:</span>
+                    <span class="comp-v mono" id="comp-next-risk">26/100</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Real Calculated Deltas -->
+              <div class="comparison-deltas-block">
+                <div class="delta-item">
+                  <span class="delta-label">Transaction Activity:</span>
+                  <strong class="delta-val" id="tp-delta-txs">Genesis Snapshot (Baseline)</strong>
+                </div>
+                <div class="delta-item">
+                  <span class="delta-label">Illicit Activity:</span>
+                  <strong class="delta-val text-threat" id="tp-delta-illicit">Initial temporal dataset baseline established</strong>
+                </div>
+                <div class="delta-item">
+                  <span class="delta-label">Risk Change:</span>
+                  <strong class="delta-val" id="tp-delta-risk">Initial baseline risk: 26/100</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- High-Risk Period Discovery Ranking Section -->
+        <div class="timeline-discovery-section">
+          <div class="discovery-header-row">
+            <span class="hdr-tag">Top High-Risk Periods in Dataset</span>
+            <span class="discovery-subtitle">Ranked by real criminal concentration and analytical threat density</span>
+          </div>
+          <div class="high-risk-periods-grid" id="high-risk-periods-grid">
+            <!-- Dynamically populated top 6 threat periods -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- VIEW 1: HOME (COMMERCIAL 3D TRANSACTION INTELLIGENCE WORKSTATION)   -->
+    <!-- =================================================================== -->
+    <section class="spatial-view-container view-home" id="view-home">
+      <div class="home-workstation-layout">
+        <!-- LEFT COLUMN: COMMAND & SEARCH IDENTITY -->
+        <aside class="home-sidebar-panel">
+          <!-- Header Branding -->
+          <div class="home-brand-block">
+            <h1 class="home-title">CryptoForensics</h1>
+            <span class="home-badge-subtitle">AI-powered Bitcoin transaction intelligence</span>
+            <p class="home-lead-text">
+              &ldquo;Discover suspicious activity. Understand why it matters. Trace the network. Build evidence.&rdquo;
+            </p>
+          </div>
+
+          <!-- Primary Actions -->
+          <div class="home-primary-actions-group">
+            <button class="btn-home-hero-primary" id="btn-home-discover-action">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/></svg>
+              <span>Discover Suspicious Activity</span>
+            </button>
+            <button class="btn-home-hero-secondary" id="btn-home-investigate-action">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <span>Investigate Transaction</span>
+            </button>
+          </div>
+
+          <!-- Primary Investigation Direct Search -->
+          <div class="home-card-block">
+            <label class="home-block-label" for="home-search-input">Lookup Specific Transaction</label>
+            <div class="home-search-row">
+              <input type="text" id="home-search-input" placeholder="Enter Bitcoin Tx ID..." autocomplete="off" spellcheck="false">
+              <button class="btn-home-primary" id="btn-home-search">Go</button>
+            </div>
+            <span class="home-search-hint text-dim text-xs">Explore prioritized candidates in the triage queue below</span>
+          </div>
+
+          <!-- Compact LIVE DATASET Panel -->
+          <div class="home-live-dataset-box">
+            <span class="live-dataset-title">● Live Dataset Benchmark</span>
+            <div class="home-telemetry-strip">
+              <div class="home-stat-unit">
+                <strong class="stat-num mono">203,769</strong>
+                <span class="stat-lbl">Transactions</span>
+              </div>
+              <div class="home-stat-divider"></div>
+              <div class="home-stat-unit">
+                <strong class="stat-num mono text-threat">4,545</strong>
+                <span class="stat-lbl">Illicit</span>
+              </div>
+              <div class="home-stat-divider"></div>
+              <div class="home-stat-unit">
+                <strong class="stat-num mono">49</strong>
+                <span class="stat-lbl">Time Periods</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- RIGHT MAIN FORENSIC DISCOVERY WORKSTATION -->
+        <main class="home-discovery-panel" id="home-discovery-section">
+          <!-- Discovery Header -->
+          <div class="discovery-panel-header">
+            <div class="discovery-header-titles">
+              <div class="discovery-badge-row">
+                <span class="discovery-live-badge">● Live Dataset Triage</span>
+                <span class="discovery-count-pill" id="home-discovery-total-badge">203,769 Transactions Evaluated</span>
+              </div>
+              <h2 class="discovery-main-title">Discover Suspicious Activity</h2>
+              <p class="discovery-subtitle">
+                Automated priority queue ranked from the verified Elliptic Bitcoin dataset. Select any candidate below to isolate, trace, and evaluate risk without needing prior knowledge of a transaction ID.
+              </p>
+            </div>
+            <button class="btn-open-network-hero" id="btn-home-expand-network">
+              <span>Open 3D Network Workstation</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+
+          <!-- Discovery Interactive Filters Toolbar -->
+          <div class="discovery-filter-toolbar">
+            <div class="discovery-risk-filters" id="home-risk-filters">
+              <button class="disc-filter-btn active" data-category="ALL">All</button>
+              <button class="disc-filter-btn crit" data-category="CRITICAL">Critical</button>
+              <button class="disc-filter-btn high" data-category="HIGH">High</button>
+              <button class="disc-filter-btn med" data-category="MEDIUM">Medium</button>
+              <button class="disc-filter-btn low" data-category="LOW">Low</button>
+              <button class="disc-filter-btn unk" data-category="UNKNOWN">Unknown</button>
+            </div>
+
+            <div class="discovery-controls-cluster">
+              <div class="discovery-period-filter-wrap">
+                <label for="home-discovery-period-select" class="disc-period-label">PERIOD:</label>
+                <select id="home-discovery-period-select" class="disc-period-dropdown">
+                  <option value="">All 49 Periods</option>
+                </select>
+              </div>
+
+              <div class="discovery-period-filter-wrap">
+                <label for="home-discovery-sort-select" class="disc-period-label">SORT BY:</label>
+                <select id="home-discovery-sort-select" class="disc-period-dropdown">
+                  <option value="risk">Highest Risk</option>
+                  <option value="degree">Most Connected</option>
+                  <option value="recent">Recent/Latest Period</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Discovery Candidates Grid (Populated dynamically from /api/discovery/suspicious) -->
+          <div class="discovery-cards-grid" id="home-discovery-candidates-grid">
+            <div class="discovery-loading-state">
+              <div class="loading-spinner mini"></div>
+              <span>Querying Elliptic Forensic Intelligence Queue...</span>
+            </div>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- VIEW 2: INVESTIGATE (3-COLUMN PROFESSIONAL WORKSTATION)             -->
+    <!-- =================================================================== -->
+    <section class="spatial-view-container view-investigate hidden" id="view-investigate">
+      <div class="investigate-workstation-layout">
+        <!-- COLUMN 1: LEFT CONTROLS, DISCOVERY & JOURNEY (~320px) -->
+        <aside class="inv-col-left">
+          <div class="inv-col-header">
+            <h3 class="inv-main-question">Investigate a Transaction</h3>
+            <span class="inv-col-sub">Choose a suspicious target or enter a transaction ID</span>
+          </div>
+
+          <!-- OPTION 1: SEARCH A TRANSACTION ID -->
+          <div class="inv-choice-box">
+            <div class="choice-header-row">
+              <span class="choice-letter">1</span>
+              <strong class="choice-heading">Search by Transaction ID</strong>
+            </div>
+            <div class="inv-search-box-compact">
+              <input type="text" id="inv-page-search-input" placeholder="Enter Bitcoin transaction ID..." autocomplete="off" spellcheck="false">
+              <button class="btn-inv-go" id="btn-inv-page-search">Investigate</button>
+            </div>
+          </div>
+
+          <!-- OPTION 2: RECOMMENDED INVESTIGATIONS & SUSPICIOUS ACTIVITY -->
+          <div class="inv-choice-box">
+            <div class="choice-header-row">
+              <span class="choice-letter">2</span>
+              <strong class="choice-heading">Recommended Targets</strong>
+            </div>
+            <p class="choice-subtext">Real dataset targets ranked by analytical threat score and illicit ground-truth.</p>
+            <div class="inv-examples-cards-stack" id="inv-recommended-container">
+              <!-- Initial real dataset targets populated; upgraded dynamically from /api/metrics/command_center -->
+              <button class="inv-example-card threat" data-tx="16742787" data-slice="1" title="Investigate Suspicious Target #16742787">
+                <div class="ex-card-left">
+                  <span class="ex-card-tag text-threat">Suspicious Target</span>
+                  <strong class="ex-card-id mono">#16742787</strong>
+                  <span class="ex-card-dataset">Dataset: Illicit · Time Period 1</span>
+                </div>
+                <div class="ex-card-right">
+                  <span class="ex-card-badge threat">Critical · 93</span>
+                  <span class="ex-chevron">→</span>
+                </div>
+              </button>
+
+              <button class="inv-example-card licit" data-tx="13239490" data-slice="1" title="Investigate Verified Entity #13239490">
+                <div class="ex-card-left">
+                  <span class="ex-card-tag text-licit">Verified Entity</span>
+                  <strong class="ex-card-id mono">#13239490</strong>
+                  <span class="ex-card-dataset">Dataset: Licit · Time Period 1</span>
+                </div>
+                <div class="ex-card-right">
+                  <span class="ex-card-badge licit">Low Risk · 12</span>
+                  <span class="ex-chevron">→</span>
+                </div>
+              </button>
+            </div>
+
+            <button class="btn-suspicious-trigger" id="btn-open-suspicious-modal" style="margin-top: 8px;" title="Browse all ranked suspicious transactions">
+              <span class="btn-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/></svg>
+              </span>
+              <span>Browse All Suspicious Activity</span>
+              <span class="btn-arrow">→</span>
+            </button>
+          </div>
+
+          <!-- 4-STEP INVESTIGATION JOURNEY (Requirement 4) -->
+          <div class="inv-journey-card">
+            <span class="journey-title-label">Investigation Workflow</span>
+            <div class="journey-steps-vertical">
+              <div class="jstep-row active" id="jstep-1">
+                <div class="jstep-badge mono">1</div>
+                <div class="jstep-meta">
+                  <strong class="jstep-title">Discover & Select</strong>
+                  <span class="jstep-desc">Pick suspicious target or enter transaction ID</span>
+                </div>
+              </div>
+              <div class="jstep-arrow-down">↓</div>
+              <div class="jstep-row active" id="jstep-2">
+                <div class="jstep-badge mono">2</div>
+                <div class="jstep-meta">
+                  <strong class="jstep-title">Understand & Verify</strong>
+                  <span class="jstep-desc">Review ground truth vs analytical risk &amp; flag reasons</span>
+                </div>
+              </div>
+              <div class="jstep-arrow-down">↓</div>
+              <div class="jstep-row" id="jstep-3">
+                <div class="jstep-badge mono">3</div>
+                <div class="jstep-meta">
+                  <strong class="jstep-title">Trace Fund Flow</strong>
+                  <span class="jstep-desc">Follow 1 or 2 hops of connections with directional path</span>
+                </div>
+              </div>
+              <div class="jstep-arrow-down">↓</div>
+              <div class="jstep-row" id="jstep-4">
+                <div class="jstep-badge mono">4</div>
+                <div class="jstep-meta">
+                  <strong class="jstep-title">Evidence & Case Report</strong>
+                  <span class="jstep-desc">Document findings &amp; export compliance report</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- COLUMN 2: CENTER HERO 3D GRAPH WORKSPACE (Flex 1) -->
+        <main class="inv-col-center">
+          <!-- Top Floating Connection Controls Bar -->
+          <div class="inv-center-floating-bar">
+            <div class="center-target-badge">
+              <span class="target-tag">Selected Target</span>
+              <strong class="target-tx-val mono" id="inv-center-tx-id">#16742787</strong>
+            </div>
+
+            <!-- Connection Depth Buttons -->
+            <div class="inv-depth-controls">
+              <span class="depth-label">Connections:</span>
+              <button class="btn-inv-depth active" id="btn-inv-trace-1" data-depth="1">1 Connection</button>
+              <button class="btn-inv-depth" id="btn-inv-trace-2" data-depth="2">2 Connections</button>
+              <button class="btn-inv-depth" id="btn-inv-trace-3" data-depth="3">3 Connections</button>
+              <button class="btn-inv-reset" id="btn-inv-reset-view">Reset View</button>
+            </div>
+
+            <div class="center-network-jump">
+              <button class="btn-network-jump-link" id="btn-inv-jump-3d">Full Network →</button>
+            </div>
+          </div>
+
+          <!-- Subtle Center HUD Info Pill -->
+          <div class="center-hud-pill">
+            <span class="hud-dot"></span>
+            <span id="inv-trace-summary-details">Isolated connections for selected transaction #16742787. Connected nodes retain their individual classifications.</span>
+          </div>
+        </main>
+
+        <!-- COLUMN 3: RIGHT TRANSACTION SUMMARY & ACTIONS (~380px) -->
+        <aside class="inv-col-right">
+          <!-- Investigation Error Card (Human Readable + Retry) -->
+          <div class="inv-summary-card inv-error-card hidden" id="inv-error-state">
+            <div class="inv-card-hdr">
+              <span class="hdr-tag text-threat">Investigation Notice</span>
+            </div>
+            <div class="inv-error-content">
+              <div class="inv-error-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <div class="inv-error-text">
+                <strong class="inv-error-headline" id="inv-error-headline">Transaction Not Found</strong>
+                <p class="inv-error-detail" id="inv-error-detail">Unable to locate transaction in the Elliptic dataset or backend service.</p>
+              </div>
+            </div>
+            <button class="btn-inv-retry" id="btn-inv-retry">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/></svg>
+              <span>Retry Investigation</span>
+            </button>
+          </div>
+
+          <!-- Card 1: Primary Target Overview -->
+          <div class="inv-summary-card" id="inv-summary-main-card">
+            <div class="inv-card-hdr">
+              <span class="hdr-tag">Target Transaction</span>
+              <button class="btn-copy-action" id="btn-copy-inv-tx" title="Copy TXID">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span>Copy</span>
+              </button>
+            </div>
+            <div class="tx-id-row">
+              <strong class="tx-id-display mono" id="inv-card-tx-id">#16742787</strong>
+            </div>
+            <div class="target-meta-block">
+              <span class="dataset-class-header">Dataset Classification</span>
+              <div class="tx-meta-pills">
+                <span class="pill-class threat" id="inv-card-class">Illicit</span>
+                <span class="pill-period mono" id="inv-card-period">Time Period 1</span>
+              </div>
+              <span class="ground-truth-caption" id="inv-card-ground-truth-caption">Verified label from Elliptic Bitcoin benchmark dataset</span>
+              <div class="analytical-assessment-row" id="inv-card-assessment-wrap" style="display: flex; align-items: center; justify-content: space-between; margin-top: 6px; padding: 4px 8px; background: rgba(30, 41, 59, 0.5); border-radius: 4px; border: 1px solid rgba(148, 163, 184, 0.1);">
+                <span style="font-size: 0.65rem; color: #94a3b8;">Analytical Assessment:</span>
+                <span id="inv-card-assessment-val" style="font-size: 0.70rem; font-weight: 700; color: #38bdf8;">Illicit (ML Model Inference)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: AI Risk Assessment -->
+          <div class="inv-summary-card" id="inv-risk-main-card">
+            <div class="inv-card-hdr">
+              <span class="hdr-tag">AI Risk Assessment</span>
+              <span class="model-badge-tag" id="inv-card-model-status">Real ML Model Active</span>
+            </div>
+
+            <!-- Compact 4-Cell Metric Grid (Final Risk, ML Risk, Network Risk, Confidence) -->
+            <div class="ai-risk-metrics-grid">
+              <div class="ai-metric-box highlight-final">
+                <span class="ai-metric-lbl">Final Risk</span>
+                <div class="ai-metric-val-wrap">
+                  <span class="ai-metric-num mono text-threat" id="inv-card-final-risk">93</span>
+                  <span class="ai-metric-denom mono">/ 100</span>
+                </div>
+              </div>
+              <div class="ai-metric-box">
+                <span class="ai-metric-lbl">ML Risk</span>
+                <div class="ai-metric-val-wrap">
+                  <span class="ai-metric-num mono text-cyan" id="inv-card-ml-risk">91</span>
+                  <span class="ai-metric-denom mono">/ 100</span>
+                </div>
+              </div>
+              <div class="ai-metric-box">
+                <span class="ai-metric-lbl">Network Risk</span>
+                <div class="ai-metric-val-wrap">
+                  <span class="ai-metric-num mono text-amber" id="inv-card-network-risk">88</span>
+                  <span class="ai-metric-denom mono">/ 100</span>
+                </div>
+              </div>
+              <div class="ai-metric-box">
+                <span class="ai-metric-lbl">Confidence</span>
+                <div class="ai-metric-val-wrap">
+                  <span class="ai-metric-num mono text-emerald" id="inv-card-confidence-num">96%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="risk-track-bar">
+              <div class="risk-fill-bar" id="inv-card-risk-bar" style="width: 93%;"></div>
+            </div>
+
+            <div class="pattern-info-row">
+              <span class="pattern-label">Behavioral Pattern:</span>
+              <strong class="pattern-val mono text-cyan" id="inv-card-pattern">High-Risk Peeling Chain</strong>
+            </div>
+
+            <!-- Why This Score section -->
+            <div class="why-this-score-section">
+              <div class="why-this-score-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <span>Why This Score</span>
+              </div>
+              <ul class="why-this-score-list" id="inv-card-why-this-score-list">
+                <li>High illicit probability (96%) evaluated by trained HistGradientBoosting classifier</li>
+                <li>Strong connection to high-risk neighborhood with direct counterparty taint</li>
+                <li>Unusual feature pattern: local transaction variance deviation</li>
+                <li>Model confidence: 96%</li>
+              </ul>
+            </div>
+
+            <!-- Transparent Model Info Section (Offline Supervised ML) -->
+            <div class="model-spec-info-box" id="inv-model-spec-box" style="margin-top: 10px; padding: 10px 12px; background: rgba(15, 23, 42, 0.65); border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.25);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; color: #38bdf8;">Offline ML Model Specifications</span>
+                <span class="mono" style="font-size: 0.62rem; color: #10b981; background: rgba(16, 185, 129, 0.12); padding: 2px 6px; border-radius: 3px; border: 1px solid rgba(16, 185, 129, 0.3);">Offline Active</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 10px; font-size: 0.72rem; color: #cbd5e1;">
+                <div><span style="color: #94a3b8;">ML Model:</span> <strong id="spec-model-name" class="mono">HistGradientBoosting</strong></div>
+                <div><span style="color: #94a3b8;">Training:</span> <strong>Elliptic Bitcoin Dataset</strong></div>
+                <div><span style="color: #94a3b8;">Features:</span> <strong id="spec-features-count" class="mono">172</strong></div>
+                <div><span style="color: #94a3b8;">Mode:</span> <strong class="mono">Offline</strong></div>
+                <div style="grid-column: span 2;"><span style="color: #94a3b8;">Classification:</span> <strong>Licit / Illicit</strong> <span style="color: #94a3b8; font-size: 0.66rem;">(Unlabeled receive analytical predictions)</span></div>
+              </div>
+            </div>
+
+            <!-- Expandable Method Transparency Section -->
+            <details class="method-transparency-box" id="inv-method-details" style="margin-top: 8px;">
+              <summary class="method-transparency-summary">
+                <span class="method-title">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                  <span>Model Method &amp; Evaluation</span>
+                </span>
+                <span class="method-toggle-hint">Click to expand</span>
+              </summary>
+              <div class="method-details-table">
+                <div class="method-row">
+                  <span class="method-k">Dataset:</span>
+                  <span class="method-v" id="inv-method-dataset">Elliptic Bitcoin Transaction Dataset</span>
+                </div>
+                <div class="method-row">
+                  <span class="method-k">Model:</span>
+                  <span class="method-v mono" id="inv-method-model">HistGradientBoostingClassifier (Graph-Augmented)</span>
+                </div>
+                <div class="method-row">
+                  <span class="method-k">Training:</span>
+                  <span class="method-v" id="inv-method-training">Supervised on Illicit (class 1) + Licit (class 2) nodes</span>
+                </div>
+                <div class="method-row">
+                  <span class="method-k">Features:</span>
+                  <span class="method-v mono" id="inv-method-features">172 (165 normalized + 7 graph topological)</span>
+                </div>
+                <div class="method-row">
+                  <span class="method-k">Mode:</span>
+                  <span class="method-v mono" id="inv-method-mode">Offline (Local Scikit-Learn Artifact)</span>
+                </div>
+                <div class="method-row">
+                  <span class="method-k">Classification:</span>
+                  <span class="method-v mono" id="inv-method-classification">Licit / Illicit</span>
+                </div>
+                <div class="method-row">
+                  <span class="method-k">Unknown labels:</span>
+                  <span class="method-v" id="inv-method-unknown">Excluded from training; evaluated via ML inference</span>
+                </div>
+                <div class="method-row">
+                  <span class="method-k">Network analysis:</span>
+                  <span class="method-v" id="inv-method-network">Forensic topology engine (1-hop taint + DAG fan-in/fan-out)</span>
+                </div>
+                <div class="method-row">
+                  <span class="method-k">Validation metric:</span>
+                  <span class="method-v mono" id="inv-method-metric">Test ROC-AUC: 0.9392 | Precision: 0.9292 | F1: 0.7858</span>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <!-- Card 3: Top Contributing Features -->
+          <div class="inv-summary-card" id="inv-why-main-card">
+            <div class="inv-card-hdr">
+              <span class="hdr-tag">Top Contributing Model Features</span>
+            </div>
+            <ul class="why-flagged-bullets" id="inv-card-why-list">
+              <li>Local feature attribution signature</li>
+              <li>Input/Output consolidation ratio</li>
+              <li>Neighborhood topological variance</li>
+            </ul>
+          </div>
+
+          <!-- Card 4: Simple Primary Actions -->
+          <div class="inv-summary-card">
+            <div class="inv-card-hdr">
+              <span class="hdr-tag">Primary Actions</span>
+            </div>
+            <div class="inv-next-actions-grid">
+              <button class="btn-action-tile" id="btn-inv-trace-action" title="Trace fund connections">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                <span>Trace Connections</span>
+              </button>
+              <button class="btn-action-tile" id="btn-inv-view-evidence" title="View technical evidence chain">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                <span>View Evidence</span>
+              </button>
+              <button class="btn-action-tile primary" id="btn-inv-create-case" title="Create a forensic investigation case">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                <span>Create Case</span>
+              </button>
+              <button class="btn-action-tile secondary" id="btn-inv-generate-report" title="Generate compliance report">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span>Generate Report</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Expandable Evidence Section -->
+          <div class="inv-summary-card hidden" id="inv-evidence-section">
+            <div class="inv-card-hdr">
+              <span class="hdr-tag">Evidence Chain</span>
+            </div>
+            <div class="evidence-steps-flow">
+              <div class="ev-step-item">
+                <span class="ev-step-num">01</span>
+                <div class="ev-step-info">
+                  <strong>Blockchain Transaction</strong>
+                  <span>Confirmed Bitcoin transaction indexed in Elliptic DAG.</span>
+                </div>
+              </div>
+              <div class="ev-step-item">
+                <span class="ev-step-num">02</span>
+                <div class="ev-step-info">
+                  <strong>Connected Proximity</strong>
+                  <span>Multi-hop proximity to confirmed illicit entities.</span>
+                </div>
+              </div>
+              <div class="ev-step-item">
+                <span class="ev-step-num">03</span>
+                <div class="ev-step-info">
+                  <strong>Pattern Verification</strong>
+                  <span>Structured peeling activity matching money-laundering topologies.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Expandable Technical Details Drawer -->
+          <details class="tech-details-drawer">
+            <summary class="tech-drawer-summary">
+              <span>Show technical details ▾</span>
+            </summary>
+            <div class="tech-drawer-content">
+              <div class="tech-meta-row">
+                <span>In-Degree: <strong id="inv-tech-in-deg" class="mono">0</strong></span>
+                <span>Out-Degree: <strong id="inv-tech-out-deg" class="mono">0</strong></span>
+              </div>
+              <div class="features-vector-preview mono" id="inv-features-vector-text">
+                Loading feature array...
+              </div>
+            </div>
+          </details>
+        </aside>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- VIEW 3: NETWORK (FULL-SCREEN 3D INTERACTIVE WORKSTATION)           -->
+    <!-- =================================================================== -->
+    <section class="spatial-view-container view-network hidden" id="view-network">
+      <!-- Minimal Floating Top Controls Bar -->
+      <header class="network-top-bar" id="network-top-controls">
+        <div class="net-title-group">
+          <h2>3D Transaction Network</h2>
+          <span class="net-subtitle">Explore how Bitcoin transactions connect.</span>
+        </div>
+
+        <!-- Search Input -->
+        <div class="net-search-wrap">
+          <svg class="search-mini-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+          <input type="text" id="investigate-search-input" placeholder="Search transaction ID..." autocomplete="off" spellcheck="false">
+          <button id="btn-search-trigger" class="btn-net-search">Search</button>
+        </div>
+
+        <!-- Segmented Classification Filter -->
+        <div class="net-filter-cluster">
+          <button class="segment-btn active" data-filter="all" id="btn-filter-all">All</button>
+          <button class="segment-btn" data-filter="illicit" id="btn-filter-illicit">Illicit</button>
+          <button class="segment-btn" data-filter="licit" id="btn-filter-licit">Licit</button>
+          <button class="segment-btn" data-filter="unknown" id="btn-filter-unknown">Unknown</button>
+        </div>
+
+        <!-- Reset View & Flow Toggle -->
+        <button class="btn-network-reset" id="btn-reset-view">Reset View</button>
+        <button class="btn-network-toggle active" id="btn-toggle-particles" title="Toggle Directional Fund Flow Particles">Flow: On</button>
+
+        <!-- Live Telemetry Counts -->
+        <div class="net-counts-strip">
+          <span class="count-tag">Visible: <strong class="mono" id="lbl-rendered-nodes">0</strong></span>
+          <span class="count-divider">·</span>
+          <span class="count-tag text-threat">Illicit: <strong class="mono text-threat" id="lbl-rendered-illicit">0</strong></span>
+        </div>
+      </header>
+
+      <!-- Minimal Floating Legend -->
+      <div class="floating-legend">
+        <div class="legend-item"><span class="legend-dot dot-threat"></span><span>Illicit</span></div>
+        <div class="legend-item"><span class="legend-dot dot-licit"></span><span>Licit</span></div>
+        <div class="legend-item"><span class="legend-dot dot-unknown"></span><span>Unknown</span></div>
+        <div class="legend-item"><span class="legend-line"></span><span>Connection</span></div>
+      </div>
+
+      <!-- RIGHT FLOATING INSPECTOR PANEL (Only shown when a transaction is selected) -->
+      <aside class="floating-panel right-inspector-panel hidden" id="inspector-panel-root">
+        <!-- Active Selected View -->
+        <div class="inspector-active-view hidden" id="inspector-active-view">
+          <!-- Top Navigation Header -->
+          <div class="investigation-nav-header">
+            <button class="btn-back-network" id="btn-back-to-network" title="Return to complete network view">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+              <span>← Back to Network</span>
+            </button>
+            <span class="active-focus-label" id="insp-focus-indicator">1-Hop Focus Active</span>
+            <button class="btn-icon-close-insp" id="btn-close-inspector" title="Close Panel">✕</button>
+          </div>
+
+          <!-- SECTION 1: SELECTED TRANSACTION -->
+          <div class="inspector-section-card" id="insp-section-selected">
+            <span class="tx-label">1. SELECTED TRANSACTION</span>
+            <div class="tx-id-display-row">
+              <span class="tx-hash mono font-bold" id="insp-tx-id">#16742787</span>
+              <button class="btn-icon-copy" id="btn-copy-tx-id" title="Copy ID">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              </button>
+            </div>
+            <div class="card-top-meta">
+              <span class="status-pill threat" id="insp-status-pill">Dataset: Illicit</span>
+              <span class="slice-pill mono" id="insp-slice-pill">Period 1</span>
+            </div>
+
+            <!-- 4-Cell Intelligence Risk Metrics Grid -->
+            <div class="ai-risk-metrics-grid" style="margin-top: 10px; margin-bottom: 6px;">
+              <div class="ai-metric-box highlight-final">
+                <span class="ai-metric-lbl">Final Risk</span>
+                <div class="ai-metric-val-wrap">
+                  <span class="ai-metric-num mono text-threat" id="insp-final-risk">93</span>
+                  <span class="ai-metric-denom mono">/ 100</span>
+                </div>
+              </div>
+              <div class="ai-metric-box">
+                <span class="ai-metric-lbl">ML Risk</span>
+                <div class="ai-metric-val-wrap">
+                  <span class="ai-metric-num mono text-cyan" id="insp-ml-risk">91</span>
+                  <span class="ai-metric-denom mono">/ 100</span>
+                </div>
+              </div>
+              <div class="ai-metric-box">
+                <span class="ai-metric-lbl">Net Risk</span>
+                <div class="ai-metric-val-wrap">
+                  <span class="ai-metric-num mono text-amber" id="insp-network-risk">88</span>
+                  <span class="ai-metric-denom mono">/ 100</span>
+                </div>
+              </div>
+              <div class="ai-metric-box">
+                <span class="ai-metric-lbl">Confidence</span>
+                <div class="ai-metric-val-wrap">
+                  <span class="ai-metric-num mono text-emerald" id="insp-conf-num">96%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="risk-progress-track">
+              <div class="risk-progress-bar" id="insp-risk-bar" style="width: 93%;"></div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: WHY THIS TRANSACTION MATTERS -->
+          <div class="inspector-section-card" id="insp-section-why">
+            <span class="tx-label">2. WHY THIS TRANSACTION MATTERS</span>
+            <ul class="clean-bullet-list" id="why-flagged-list">
+              <li>Classified as illicit entity in the Elliptic Bitcoin dataset.</li>
+              <li>Direct multi-hop proximity to flagged criminal cluster.</li>
+              <li>High-velocity fund splitting pattern consistent with money laundering.</li>
+            </ul>
+          </div>
+
+          <!-- SECTION 3: CONNECTED ACTIVITY & NETWORK PATTERN -->
+          <div class="inspector-section-card" id="insp-section-context">
+            <span class="tx-label">3. CONNECTED ACTIVITY</span>
+            <div class="context-grid-row" style="grid-template-columns: repeat(4, 1fr);">
+              <div class="context-metric-cell">
+                <span class="cell-label">Total</span>
+                <strong class="cell-val mono" id="insp-tot-deg">4</strong>
+              </div>
+              <div class="context-metric-cell">
+                <span class="cell-label text-threat">High-Risk</span>
+                <strong class="cell-val mono text-threat" id="insp-high-risk-conns">1</strong>
+              </div>
+              <div class="context-metric-cell">
+                <span class="cell-label text-threat">Illicit</span>
+                <strong class="cell-val mono text-threat" id="insp-illicit-conns">1</strong>
+              </div>
+              <div class="context-metric-cell">
+                <span class="cell-label text-dim">Unknown</span>
+                <strong class="cell-val mono text-dim" id="insp-unknown-conns">3</strong>
+              </div>
+            </div>
+
+            <div class="context-pattern-row" style="margin-top: 10px;">
+              <span class="cell-label">Network Pattern:</span>
+              <strong class="pattern-val mono text-cyan" id="insp-network-pattern-val">High-Risk Peeling Chain</strong>
+            </div>
+          </div>
+
+          <!-- SECTION 4: TRACE SCOPE -->
+          <div class="inspector-section-card" id="insp-section-trace">
+            <div class="trace-header-flex">
+              <span class="tx-label">4. TRACE MONEY FLOW</span>
+              <span class="trace-scope-badge" id="insp-trace-depth-val">1-hop active</span>
+            </div>
+            <div class="depth-buttons-cluster">
+              <button class="depth-btn active" data-depth="1" id="btn-trace-1">Trace 1-Hop</button>
+              <button class="depth-btn" data-depth="2" id="btn-trace-2">Trace 2-Hop</button>
+              <button class="depth-btn btn-reset-trace" id="btn-trace-reset">Reset Focus</button>
+            </div>
+          </div>
+
+          <!-- SECTION 5: TRACE PATH (FUND FLOW) -->
+          <div class="inspector-section-card" id="insp-section-path">
+            <span class="tx-label">5. FUND FLOW / TRACE PATH</span>
+            <div class="trace-steps-container" id="insp-trace-path-steps">
+              <!-- Populated dynamically -->
+              <div class="trace-step-item origin active" data-step="1">
+                <div class="step-num-badge">1</div>
+                <div class="step-meta">
+                  <div class="step-role">Target Entity</div>
+                  <strong class="step-tx mono text-threat" id="trace-step-target-tx">#16742787</strong>
+                </div>
+                <span class="step-dir-tag">Origin</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 6: ACTIONS -->
+          <div class="inspector-section-card" id="insp-section-actions">
+            <span class="tx-label">6. INVESTIGATION ACTIONS</span>
+            <div class="inspector-action-buttons">
+              <button class="btn-insp-action primary" id="btn-create-case-insp">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                <span>Add to Case</span>
+              </button>
+              <button class="btn-insp-action secondary" id="btn-gen-report-insp">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+                <span>Generate Report</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- BOTTOM TIME PERIOD CONTROL BAR -->
+      <footer class="investigation-time-bar" id="investigation-time-bar">
+        <div class="time-bar-inner">
+          <div class="time-label-group">
+            <span class="time-section-title">Temporal Analysis</span>
+            <div class="time-period-indicator">
+              <span class="time-period-value mono font-bold" id="nav-slice-counter">Period 1 of 49</span>
+            </div>
+            <div id="timeline-period-stats" class="timeline-period-stats"></div>
+          </div>
+
+          <!-- Interactive 49-Period Progression Indicator -->
+          <div class="visual-timeline-wrap">
+            <div class="visual-timeline-strip" id="visual-timeline-strip"></div>
+          </div>
+
+          <!-- Clean Period Selection Controls -->
+          <div class="time-controls-cluster">
+            <button class="time-nav-btn" id="btn-nav-prev" title="Previous Time Period">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+              <span>Previous</span>
+            </button>
+
+            <select id="select-slice-jump" class="time-select-dropdown" title="Select Time Period 1-49">
+              <!-- Dynamically populated Period 1 to 49 options -->
+            </select>
+
+            <button class="time-nav-btn" id="btn-nav-next" title="Next Time Period">
+              <span>Next</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="timeline-explanation-row">
+          <span class="timeline-explanation-text">49 temporal snapshots (~2 weeks each) from the verified Elliptic Bitcoin benchmark. Switching periods loads the corresponding real dataset graph.</span>
+        </div>
+      </footer>
+    </section>
+ 
+    <!-- =================================================================== -->
+    <!-- VIEW: CASES (FORENSIC INVESTIGATION WORKSTATION)                   -->
+    <!-- =================================================================== -->
+    <section class="spatial-view-container view-cases hidden" id="view-cases">
+      <div class="cases-workstation-layout">
+        <header class="cases-header-bar">
+          <div class="cases-title-block">
+            <div class="cases-tag-pill">Case Management · Audit Evidence Locker</div>
+            <h2 class="cases-main-title">Forensic AML Investigation Cases</h2>
+            <p class="cases-subtitle">Persistent investigation records, isolated evidence lockers, and regulatory audit compliance.</p>
+          </div>
+          <div class="cases-header-actions">
+            <button class="btn-create-new-case" id="btn-create-case-page">+ New Investigation Case</button>
+          </div>
+        </header>
+
+        <div class="cases-main-grid">
+          <!-- Cases List Column -->
+          <div class="cases-list-column">
+            <div class="cases-list-header">
+              <span class="cases-list-title">Active Case Files</span>
+              <span class="cases-count-badge mono" id="page-cases-count">0 Cases</span>
+            </div>
+            <div class="cases-cards-stack" id="page-cases-list-container">
+              <!-- Dynamically populated cases cards -->
+            </div>
+          </div>
+
+          <!-- Case Detail & Evidence Locker Column -->
+          <div class="cases-detail-column" id="page-case-detail-container">
+            <div class="case-empty-prompt">
+              <span>Select an active investigation case from the left or create a new case to review evidence, notes, and SAR reports.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- VIEW: REPORTS (FORMAL SAR & FORENSIC REPORTS WORKSTATION)          -->
+    <!-- =================================================================== -->
+    <section class="spatial-view-container view-reports hidden" id="view-reports">
+      <div class="reports-workstation-layout">
+        <header class="reports-header-bar">
+          <div class="reports-title-block">
+            <div class="reports-tag-pill">Regulatory Compliance · SAR Documentation</div>
+            <h2 class="reports-main-title">Forensic Audit & SAR Reports</h2>
+            <p class="reports-subtitle">11-section formal Suspicious Activity Reports adhering to FinCEN BSA and PMLA standards.</p>
+          </div>
+          <div class="reports-header-actions">
+            <button class="btn-table-action" id="btn-print-report-page">Print / Save as PDF</button>
+            <button class="btn-table-action" id="btn-export-json-page">Export Report JSON</button>
+          </div>
+        </header>
+
+        <div class="reports-document-container" id="page-reports-doc-container">
+          <!-- Dynamically populated 11-section report document -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- VIEW: DATA (DATASET TRANSPARENCY & PROVENANCE)                     -->
+    <!-- =================================================================== -->
+    <section class="spatial-view-container view-data hidden" id="view-data">
+      <div class="data-page-layout">
+        <header class="data-header-bar">
+          <div class="data-tag-pill">Dataset Provenance · MIT-IBM Benchmark</div>
+          <h2 class="data-main-title">Elliptic Bitcoin Transaction Benchmark</h2>
+          <p class="data-subtitle">
+            Real cryptographic blockchain transaction graph published by the MIT-IBM Watson AI Lab and Elliptic (Weber et al., 2019).
+          </p>
+        </header>
+
+        <div class="data-metrics-banner">
+          <div class="data-stat-card">
+            <span class="ds-k">Total Transactions</span>
+            <strong class="ds-v mono">203,769</strong>
+            <span class="ds-sub">100% Indexed Bitcoin Nodes</span>
+          </div>
+          <div class="data-stat-card">
+            <span class="ds-k">Directed Payment Edges</span>
+            <strong class="ds-v mono">234,355</strong>
+            <span class="ds-sub">Cryptographic Transfers</span>
+          </div>
+          <div class="data-stat-card">
+            <span class="ds-k">Time Periods</span>
+            <strong class="ds-v mono">49</strong>
+            <span class="ds-sub">~2-Week Temporal Strata</span>
+          </div>
+          <div class="data-stat-card threat">
+            <span class="ds-k">Ground-Truth Illicit</span>
+            <strong class="ds-v mono text-threat">4,545</strong>
+            <span class="ds-sub">2.23% Blacklisted Baseline</span>
+          </div>
+          <div class="data-stat-card licit">
+            <span class="ds-k">Ground-Truth Licit</span>
+            <strong class="ds-v mono text-emerald">42,019</strong>
+            <span class="ds-sub">20.62% Verified Compliant</span>
+          </div>
+          <div class="data-stat-card">
+            <span class="ds-k">Unlabeled Transactions</span>
+            <strong class="ds-v mono text-dim">157,205</strong>
+            <span class="ds-sub">77.15% Heuristic Target Space</span>
+          </div>
+        </div>
+
+        <div class="data-principles-grid">
+          <div class="data-principle-card">
+            <h4>Bitcoin Blockchain Exclusively</h4>
+            <p>CryptoForensics operates exclusively on authentic Bitcoin UTXO transaction data. All nodes represent Bitcoin transactions and all edges represent directed payment fund flows.</p>
+          </div>
+          <div class="data-principle-card">
+            <h4>Pseudonymous Cryptographic Privacy</h4>
+            <p>Bitcoin addresses and transactions are pseudonymous cryptographic hashes. In accordance with ethical forensic standards, no personal identities, physical names, bank accounts, or IP addresses are fabricated.</p>
+          </div>
+          <div class="data-principle-card">
+            <h4>Unlabeled Does Not Mean Illicit</h4>
+            <p>77.15% of transactions in the benchmark are unlabeled in the ground truth. These represent ordinary commercial and peer-to-peer Bitcoin transfers that serve as the target space for topological taint propagation and machine learning inference.</p>
+          </div>
+          <div class="data-principle-card">
+            <h4>Ground-Truth vs Analytical Risk</h4>
+            <p>The platform maintains strict ontological separation between ground-truth dataset classifications (confirmed historical law-enforcement seizures) and analytical risk assessments (probabilistic ML and network indicators).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- VIEW: ARCHITECTURE & FORENSIC PIPELINE                              -->
+    <!-- =================================================================== -->
+    <section class="spatial-view-container view-architecture hidden" id="view-architecture">
+      <div class="arch-workstation-layout">
+        <header class="arch-header-bar">
+          <div class="arch-title-group">
+            <div class="arch-tag-pill">System Architecture · Production Pipeline</div>
+            <h2 class="arch-main-title">Bitcoin Forensic Pipeline & Technology Stack</h2>
+            <p class="arch-subtitle">
+              Verified end-to-end financial-crime investigation architecture operating directly on the authentic Elliptic Bitcoin blockchain dataset.
+            </p>
+          </div>
+          <!-- Signposting Helper -->
+          <div class="page-signpost-box">
+            <div class="signpost-item"><strong>What Am I Looking At?</strong> The active technical pipeline and verified software stack.</div>
+            <div class="signpost-item"><strong>What Can I Do?</strong> Review model parameters, feature engineering specifications, and data flow.</div>
+            <div class="signpost-item"><strong>What Should I Click Next?</strong> Switch to <button class="signpost-link-btn" onclick="document.getElementById('nav-btn-investigate').click()">Investigate</button> or <button class="signpost-link-btn" onclick="document.getElementById('nav-btn-network').click()">Network</button> to test the engine.</div>
+          </div>
+        </header>
+
+        <!-- Visual 9-Step Investigation Pipeline -->
+        <div class="arch-pipeline-container">
+          <span class="arch-pipeline-label">End-to-End Data &amp; Intelligence Pipeline</span>
+          <div class="arch-pipeline-flow">
+            <div class="arch-pipe-node">
+              <span class="pipe-num">01</span>
+              <strong class="pipe-title">Elliptic Bitcoin Dataset</strong>
+              <span class="pipe-sub">203,769 Txs · 234,355 Edges · 49 Time Periods</span>
+            </div>
+            <div class="pipe-arrow">→</div>
+            <div class="arch-pipe-node">
+              <span class="pipe-num">02</span>
+              <strong class="pipe-title">Streaming Ingestion</strong>
+              <span class="pipe-sub">Memory-safe line-indexed chunk loader</span>
+            </div>
+            <div class="pipe-arrow">→</div>
+            <div class="arch-pipe-node">
+              <span class="pipe-num">03</span>
+              <strong class="pipe-title">Feature Engineering</strong>
+              <span class="pipe-sub">172 features (165 raw + 7 graph topological)</span>
+            </div>
+            <div class="pipe-arrow">→</div>
+            <div class="arch-pipe-node">
+              <span class="pipe-num">04</span>
+              <strong class="pipe-title">Graph Intelligence</strong>
+              <span class="pipe-sub">BFS DAG traversal &amp; directional cash flow</span>
+            </div>
+            <div class="pipe-arrow">→</div>
+            <div class="arch-pipe-node highlight">
+              <span class="pipe-num">05</span>
+              <strong class="pipe-title">ML Risk Engine</strong>
+              <span class="pipe-sub">HistGradientBoosting (Graph-Augmented)</span>
+            </div>
+            <div class="pipe-arrow">→</div>
+            <div class="arch-pipe-node">
+              <span class="pipe-num">06</span>
+              <strong class="pipe-title">Explainability Engine</strong>
+              <span class="pipe-sub">Permutation importance &amp; risk factors</span>
+            </div>
+            <div class="pipe-arrow">→</div>
+            <div class="arch-pipe-node highlight">
+              <span class="pipe-num">07</span>
+              <strong class="pipe-title">3D Network Workstation</strong>
+              <span class="pipe-sub">Three.js WebGL GPU instanced mesh</span>
+            </div>
+            <div class="pipe-arrow">→</div>
+            <div class="arch-pipe-node">
+              <span class="pipe-num">08</span>
+              <strong class="pipe-title">Case Management</strong>
+              <span class="pipe-sub">ACID SQLite persistence &amp; evidence locker</span>
+            </div>
+            <div class="pipe-arrow">→</div>
+            <div class="arch-pipe-node highlight">
+              <span class="pipe-num">09</span>
+              <strong class="pipe-title">SAR Report Generation</strong>
+              <span class="pipe-sub">Formal 11-section compliance audit reports</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real Technology Stack Grid -->
+        <div class="arch-tech-grid">
+          <div class="arch-tech-card">
+            <div class="tech-card-hdr">
+              <div class="tech-card-icon-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <h3 class="tech-card-title">Frontend Workstation</h3>
+            </div>
+            <ul class="tech-list">
+              <li><strong>JavaScript (ES Modules)</strong>: Modular financial-intelligence single-page workstation</li>
+              <li><strong>Vite 5</strong>: High-performance HMR and production bundle builder</li>
+              <li><strong>Three.js (^0.162.0)</strong>: Hardware-accelerated 3D WebGL network renderer</li>
+              <li><strong>d3-force-3d</strong>: Force-directed 3D spatial separation engine</li>
+              <li><strong>Custom Vanilla CSS</strong>: Hand-crafted dark financial intelligence design system</li>
+            </ul>
+          </div>
+
+          <div class="arch-tech-card">
+            <div class="tech-card-hdr">
+              <div class="tech-card-icon-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              </div>
+              <h3 class="tech-card-title">Backend & Persistence</h3>
+            </div>
+            <ul class="tech-list">
+              <li><strong>Python 3.14</strong>: High-efficiency analytical execution runtime</li>
+              <li><strong>FastAPI</strong>: Asynchronous high-throughput REST API framework</li>
+              <li><strong>Uvicorn</strong>: Lightning-fast ASGI production web server</li>
+              <li><strong>Pydantic v2</strong>: Strict schema validation and telemetry serialization</li>
+              <li><strong>SQLite3</strong>: Zero-dependency ACID-compliant forensic case database</li>
+            </ul>
+          </div>
+
+          <div class="arch-tech-card">
+            <div class="tech-card-hdr">
+              <div class="tech-card-icon-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              </div>
+              <h3 class="tech-card-title">Data & Machine Learning Engine</h3>
+            </div>
+            <ul class="tech-list">
+              <li><strong>Elliptic Bitcoin Dataset</strong>: 203,769 verified transactions (MIT-IBM Watson AI Lab)</li>
+              <li><strong>HistGradientBoostingClassifier</strong>: 160 iterations, max depth 10, balanced class weights</li>
+              <li><strong>Zero Temporal Data Leakage</strong>: Training TS 1–34, Validation TS 35–39, Out-of-Sample Test TS 40–49</li>
+              <li><strong>Certified Metrics</strong>: Test ROC-AUC: 0.9392 | Test PR-AUC: 0.7878 | Precision (Illicit): 92.9%</li>
+              <li><strong>Strict Truthfulness</strong>: Cryptographic transaction integrity with zero synthetic KYC fabrication</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =================================================================== -->
+  <!-- MODALS & OVERLAYS: CASES, REPORTS, DATASET                          -->
+  <!-- =================================================================== -->
+
+  <!-- CASE FILES LIST MODAL -->
+  <div class="modal-backdrop-clean hidden" id="case-list-modal">
+    <div class="clean-modal-card case-list-dialog">
+      <div class="modal-card-header">
+        <div>
+          <h3>Investigation Case Files</h3>
+          <p class="modal-subtitle">Persistent AML forensic investigations and audit files</p>
+        </div>
+        <button class="btn-modal-close" id="btn-close-case-list">&times;</button>
+      </div>
+      <div class="modal-card-body">
+        <div class="case-list-toolbar">
+          <div class="segmented-control mini">
+            <button class="segment-btn active" id="tab-cases-list">All Cases</button>
+            <button class="segment-btn" id="tab-reports-list">Generated Reports</button>
+          </div>
+          <button class="btn-table-action" id="btn-new-case-scratch">+ New Investigation Case</button>
+        </div>
+
+        <div id="cases-table-view">
+          <table class="cc-priority-table">
+            <thead>
+              <tr>
+                <th>Case ID</th>
+                <th>Title</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Target Entity</th>
+                <th>Updated</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="case-list-table-body">
+              <!-- Dynamically populated cases -->
+            </tbody>
+          </table>
+        </div>
+
+        <div id="reports-table-view" class="hidden">
+          <table class="cc-priority-table">
+            <thead>
+              <tr>
+                <th>Report ID</th>
+                <th>Type</th>
+                <th>Target Entity</th>
+                <th>Classification</th>
+                <th>Generated</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="report-list-table-body">
+              <!-- Dynamically populated reports -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASE WORKSPACE DIALOG (NOTES, CHECKLIST, AUDIT) -->
+  <div class="modal-backdrop-clean hidden" id="case-workspace-modal">
+    <div class="clean-modal-card case-workspace-dialog">
+      <div class="modal-card-header">
+        <div class="case-title-editor-wrap">
+          <span class="case-badge mono" id="case-detail-id">CASE #001</span>
+          <input type="text" id="case-detail-title-input" class="case-title-input" value="Suspicious Transaction Investigation">
+        </div>
+        <button class="btn-modal-close" id="btn-close-case-workspace">&times;</button>
+      </div>
+
+      <div class="case-workspace-body">
+        <div class="case-workspace-left">
+          <div class="case-status-bar">
+            <label class="case-status-label">Status:</label>
+            <select id="case-status-select" class="case-select">
+              <option value="ACTIVE">Active</option>
+              <option value="UNDER_REVIEW">Under Review</option>
+              <option value="SUBMITTED">Submitted (SAR-Filed)</option>
+              <option value="CLOSED">Closed</option>
+            </select>
+
+            <label class="case-status-label">Priority:</label>
+            <select id="case-priority-select" class="case-select">
+              <option value="CRITICAL">Critical</option>
+              <option value="HIGH">High</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="LOW">Low</option>
+            </select>
+          </div>
+
+          <div class="case-section-box">
+            <label class="section-label">Investigator Notes &amp; Findings:</label>
+            <textarea id="case-notes-editor" class="case-notes-textarea" placeholder="Enter findings, cross-chain attribution hypotheses, and AML compliance observations..."></textarea>
+          </div>
+
+          <div class="case-section-box">
+            <label class="section-label">AML Compliance Checklist:</label>
+            <div class="case-checklist-grid" id="case-checklist-items">
+              <label class="check-item"><input type="checkbox" id="chk-origin"> Verify UTXO Origin &amp; Timestamp</label>
+              <label class="check-item"><input type="checkbox" id="chk-clustering"> Analyze 2-Hop Intermediary Clustering</label>
+              <label class="check-item"><input type="checkbox" id="chk-attribution"> Cross-Reference Known Threat Actor Wallets</label>
+              <label class="check-item"><input type="checkbox" id="chk-sar"> Draft Suspicious Activity Report (SAR)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-workspace-right">
+          <div class="case-snapshot-box">
+            <label class="section-label">Target Entity Snapshot</label>
+            <div class="snapshot-details-grid mono">
+              <div><span>Target:</span> <strong id="case-snap-tx">---</strong></div>
+              <div><span>Period:</span> <strong id="case-snap-slice">---</strong></div>
+              <div><span>Threat:</span> <strong id="case-snap-threat" class="text-threat">---</strong></div>
+              <div><span>Class:</span> <strong id="case-snap-class">---</strong></div>
+            </div>
+          </div>
+
+          <div class="case-actions-cluster">
+            <button class="btn-primary-action" id="btn-save-case">Save Case</button>
+            <button class="btn-secondary-action" id="btn-generate-sar-direct">Generate SAR Report</button>
+            <button class="btn-danger-action" id="btn-delete-case">Delete Case</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INVESTIGATION & SAR REPORT VIEWER MODAL -->
+  <div class="modal-backdrop-clean hidden" id="sar-report-modal">
+    <div class="clean-modal-card sar-report-dialog">
+      <div class="modal-card-header no-print">
+        <div>
+          <h3>Investigation &amp; SAR Report Draft</h3>
+          <p class="modal-subtitle">Official AML Forensic Documentation</p>
+        </div>
+        <div class="report-header-actions">
+          <button class="btn-table-action" id="btn-print-report">Print / PDF</button>
+          <button class="btn-table-action" id="btn-export-json">Export JSON</button>
+          <button class="btn-modal-close" id="btn-close-sar-report">&times;</button>
+        </div>
+      </div>
+      <div class="sar-report-document" id="sar-report-content">
+        <!-- Dynamically rendered printable report document -->
+      </div>
+    </div>
+  </div>
+
+  <!-- DATASET TRANSPARENCY & PROVENANCE MODAL -->
+  <div class="modal-backdrop-clean hidden" id="dataset-info-modal">
+    <div class="clean-modal-card dataset-info-dialog">
+      <div class="modal-card-header">
+        <div>
+          <h3>Dataset Transparency &amp; Provenance</h3>
+          <p class="modal-subtitle">MIT-IBM Watson AI Lab • Elliptic Bitcoin Transaction Dataset</p>
+        </div>
+        <button class="btn-modal-close" id="btn-close-dataset-info">&times;</button>
+      </div>
+      <div class="modal-card-body dataset-info-body">
+        <div class="dataset-intro-box">
+          <span class="ds-title">Verified Bitcoin Transaction Graph</span>
+          <p class="ds-desc">
+            CryptoForensics operates strictly on historical ground-truth cryptographic transaction data from the <strong>Elliptic Bitcoin Dataset</strong> (Weber et al., MIT-IBM Watson AI Lab). The system performs deterministic topological analysis and behavioral risk scoring across 49 consecutive block intervals.
+          </p>
+        </div>
+
+        <div class="dataset-stats-grid">
+          <div class="ds-stat-card">
+            <span class="ds-k">Total Transactions</span>
+            <span class="ds-v mono">203,769</span>
+            <span class="ds-sub">100% Indexed Bitcoin Nodes</span>
+          </div>
+          <div class="ds-stat-card">
+            <span class="ds-k">Directed Payment Edges</span>
+            <span class="ds-v mono">234,355</span>
+            <span class="ds-sub">Cryptographic Transfers</span>
+          </div>
+          <div class="ds-stat-card">
+            <span class="ds-k">Time Periods</span>
+            <span class="ds-v mono">49 Periods</span>
+            <span class="ds-sub">~2-Week Time-Series Strata</span>
+          </div>
+          <div class="ds-stat-card threat">
+            <span class="ds-k">Ground-Truth Illicit</span>
+            <span class="ds-v mono text-threat">4,545</span>
+            <span class="ds-sub">2.23% Blacklisted Baseline</span>
+          </div>
+          <div class="ds-stat-card licit">
+            <span class="ds-k">Ground-Truth Licit</span>
+            <span class="ds-v mono text-licit">42,019</span>
+            <span class="ds-sub">20.62% Verified Compliant</span>
+          </div>
+          <div class="ds-stat-card">
+            <span class="ds-k">Unlabeled Space</span>
+            <span class="ds-v mono">157,205</span>
+            <span class="ds-sub">77.15% Heuristic Target Space</span>
+          </div>
+        </div>
+
+        <div class="dataset-disclaimer-box">
+          <strong>Data Integrity &amp; Responsible AI Statement:</strong>
+          <span>All network entities represent pseudonymous Bitcoin transactions. Off-chain personal identities and banking records are not contained within the dataset. AI fraud risk scores represent probabilistic forensic indicators for compliance review, not automatic legal determinations.</span>
+        </div>
+      </div>
+    </div>
+  <!-- =================================================================== -->
+  <!-- REAL Suspicious Transactions MODAL                                  -->
+  <!-- =================================================================== -->
+  <div class="spatial-modal-backdrop hidden" id="suspicious-tx-modal">
+    <div class="spatial-modal-card suspicious-modal-container">
+      <div class="modal-card-hdr">
+        <div class="modal-hdr-left">
+          <span class="modal-badge-pill threat">Dataset Intelligence</span>
+          <h3>Suspicious Transactions</h3>
+          <span class="modal-sub">Ranked transactions flagged by ground-truth classification &amp; risk heuristics</span>
+        </div>
+        <button class="btn-modal-close" id="btn-close-suspicious-modal" title="Close">✕</button>
+      </div>
+      <div class="suspicious-modal-table-wrap">
+        <table class="suspicious-table">
+          <thead>
+            <tr>
+              <th>Transaction</th>
+              <th>Risk Score</th>
+              <th>Dataset Classification</th>
+              <th>Time Period</th>
+              <th>Flag Reason</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="suspicious-table-tbody">
+            <!-- Populated from backend /api/metrics/command_center -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay hidden" id="graph-loading-screen">
+    <div class="loading-spinner"></div>
+    <span class="loading-text" id="loading-status-text">Loading transaction network…</span>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

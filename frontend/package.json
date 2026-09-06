@@ -1,0 +1,19 @@
+{
+  "name": "crypto-forensics-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "3d-force-graph": "^1.73.4",
+    "d3-force-3d": "^3.0.6",
+    "three": "^0.162.0"
+  },
+  "devDependencies": {
+    "vite": "^5.1.6"
+  }
+}
