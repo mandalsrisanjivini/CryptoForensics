@@ -1,14 +1,18 @@
 /**
  * Centralized API Base URL and fetch resolution for CryptoForensics.
  * 
+ * - Production: defaults to live Railway backend https://cryptoforensics-production.up.railway.app
+ *   (or custom override from import.meta.env.VITE_API_BASE_URL).
  * - Local development: defaults to '' (uses Vite proxy to http://127.0.0.1:8000).
- * - Production on Vercel: uses import.meta.env.VITE_API_BASE_URL.
- * 
- * When VITE_API_BASE_URL is set, all relative `/api/...` fetch calls across the
- * entire application automatically resolve to the deployed backend URL.
  */
 
-const rawBaseUrl = (import.meta.env.VITE_API_BASE_URL || '').trim();
+const PRODUCTION_DEFAULT_URL = 'https://cryptoforensics-production.up.railway.app';
+
+const rawBaseUrl = (
+  import.meta.env.VITE_API_BASE_URL ||
+  (import.meta.env.PROD ? PRODUCTION_DEFAULT_URL : '')
+).trim();
+
 export const API_BASE_URL = rawBaseUrl.replace(/\/+$/, '');
 
 if (API_BASE_URL) {
@@ -25,7 +29,7 @@ if (API_BASE_URL) {
           return originalFetch(new Request(targetUrl, resource), init);
         }
       } catch (e) {
-        // Fallback to default
+        // Fallback to default fetch
       }
     }
     return originalFetch(resource, init);
