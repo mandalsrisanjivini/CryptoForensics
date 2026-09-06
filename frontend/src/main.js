@@ -1,3 +1,4 @@
+import './utils/apiConfig.js';
 import { ThreeForensicGraph } from './visualization/ThreeForensicGraph.js';
 import { CommandTelemetry } from './components/CommandTelemetry.js';
 import { InvestigationControls } from './components/InvestigationControls.js';
