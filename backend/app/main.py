@@ -79,6 +79,7 @@ async def root():
         "health_url": "/api/health"
     }
 
+@app.get("/health")
 @app.get("/api/health")
 async def health_check():
     return {
